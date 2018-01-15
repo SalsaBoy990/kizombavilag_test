@@ -1,5 +1,6 @@
 'use strict';
-(function() {
+(function () {
+  // Make list element selectable and jump to an url.
   var select = document.getElementById('select-menu');
   if (select.addEventListener) {
     select.addEventListener('change', function () {
@@ -8,7 +9,7 @@
       }
     });
   } else {
-    select.attachEvent('change', function () {
+    select.attachEvent('onchange', function () {
       if (this.value) {
         window.location.href = this.value;
       }

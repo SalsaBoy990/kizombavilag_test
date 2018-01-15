@@ -2,13 +2,11 @@
 const postsJSON = require('../blogposts.json');
 const musicsJSON = require('../musics.json');
 
-
 /* This function gets the post data from our JSON 'database',
  * renders post template if the post found by its unique id,
  * and if post is nonexistent, an error page will render.
  */
 const getPostById = (uniqueId, data, callback) => {
-
   // Return true if post id (path) is correct / exists
   const findPost = (post) => {
     return post.id === uniqueId;
@@ -45,6 +43,7 @@ const singlePost = (req, res) => {
   // Gets the user supplied id from request body.
   let uniqueId = req.params.id;
   let posts = postsJSON.posts;
+
   /* This function gets the post data from JSON 'database',
   * renders post template if the post found by its unique id,
   * and if post is nonexistent, an error page will render. */
@@ -127,7 +126,6 @@ const singleApp = (req, res) => {
   });
 };
 
-
 // Callback function for the archive
 const archive = (req, res) => {
   let posts = postsJSON.posts;
@@ -151,7 +149,6 @@ const notFound = (req, res) => {
     title: 'Nem ezt az oldalt keresed.'
   });
 };
-
 
 // Export the functions.
 module.exports = {

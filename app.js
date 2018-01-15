@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
+// Sets response headers.
 const helmet = require('helmet');
 // Content Security Policy.
 const csp = require('helmet-csp');
@@ -29,24 +30,25 @@ app.use(helmet());
 // Content Security Policy added, inline scripts disabled (with 3 exeptions)
 app.use(csp({
   directives: {
-    defaultSrc: ["'self'"],
-    styleSrc: ["'self'", 'https://fonts.googleapis.com', 'https://www.youtube.com'],
-    fontSrc: ["'self'", 'https://fonts.gstatic.com/'],
-    scriptSrc: ["'self'", 'https://www.youtube.com', 'https://www.googletagmanager.com', 'https://www.google-analytics.com'],
-    childSrc: ["'self'", 'https://www.youtube.com'],
-    imgSrc: ["'self'", 'www.google-analytics.com'],
+    defaultSrc: [`'self'`],
+    styleSrc: [`'self'`, 'https://fonts.googleapis.com', 'https://www.youtube.com'],
+    fontSrc: [`'self'`, 'https://fonts.gstatic.com/'],
+    scriptSrc: [`'self'`, 'https://www.youtube.com', 'https://www.googletagmanager.com', 'https://www.google-analytics.com'],
+    childSrc: [`'self'`, 'https://www.youtube.com'],
+    imgSrc: [`'self'`, 'www.google-analytics.com'],
     objectSrc: [`'self'`],
     connectSrc: [`'self'`]
   }
 }));
-
 
 /* app.use(logger('dev')); */
 
 app.use(bodyParser.json());
 
 // To serve static files.
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+  maxAge: 2592000000
+}));
 
 // Require utils.js
 const utils = require('./routes/utils');
